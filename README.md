@@ -36,7 +36,8 @@ $ sudo apt install \
     freeglut3-dev \
     liblapacke-dev \
     libopenblas-dev \
-    libatlas-base-dev
+    libatlas-base-dev \
+    dh-python
 $ pip3 install --user pyros-genmsg
 ```
 Add ROS2 script start into startup script (e.g. ~/.bashrc)<br>
