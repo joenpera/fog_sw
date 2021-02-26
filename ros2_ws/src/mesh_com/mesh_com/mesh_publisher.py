@@ -14,7 +14,7 @@ i = ('{"api_version": 1,'
      '"mode": "mesh"}')
 
 
-class MinimalPublisher(Node):
+class MeshPublisher(Node):
 
     def __init__(self):
         super().__init__('mesh_publisher')
@@ -33,14 +33,14 @@ class MinimalPublisher(Node):
 def main(args=None):
     rclpy.init(args=args)
 
-    minimal_publisher = MinimalPublisher()
+    mesh_publisher = MeshPublisher()
 
-    rclpy.spin(minimal_publisher)
+    rclpy.spin(mesh_publisher)
 
     # Destroy the node explicitly
     # (optional - otherwise it will be done automatically
     # when the garbage collector destroys the node object)
-    minimal_publisher.destroy_node()
+    mesh_publisher.destroy_node()
     rclpy.shutdown()
 
 

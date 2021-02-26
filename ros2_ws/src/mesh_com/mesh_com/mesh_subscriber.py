@@ -57,10 +57,9 @@ class MeshSubscriber(Node):
         #                                       purposes (e.g. 5dBm)
         #     "mode": "mesh"                    mesh=mesh network, ap=debug hotspot
         # }
-        self.get_logger().info('mesh subscriber: __handle_msg')
+
         if self.settings.last_configuration_message != msg:
             self.settings.last_configuration_message = msg
-            self.get_logger().info('mesh subscriber: __handle_msg if')
             try:
                 parameters = json.loads(msg)
                 self.settings.ssid = parameters["ssid"]
@@ -72,14 +71,12 @@ class MeshSubscriber(Node):
                 self.settings.subnet = parameters["subnet"]
                 self.settings.tx_power = parameters["tx_power"]
                 self.settings.mode = parameters["mode"]
-                self.get_logger().info('mesh subscriber: before __change_configuration')
                 self.__change_configuration()
             except json.decoder.JSONDecodeError or KeyError or Exception:
-                self.get_logger().info('mesh subscriber: before __change_configuration')
+                self.get_logger().info('Setting Failed')
                 pass
 
     def __change_configuration(self):
-        self.get_logger().info('mesh subscriber: __change_configuration')
         subprocess.call(["/usr/bin/mesh.sh", quote(self.settings.mode),
                          quote(self.settings.ip),
                          quote(self.settings.subnet),
@@ -89,7 +86,7 @@ class MeshSubscriber(Node):
                          quote(self.settings.frequency),
                          quote(self.settings.tx_power),
                          quote(self.settings.country)])
-        self.get_logger().info('mesh subscriber: __change_configuration after')
+        self.get_logger().info('Setting Done')
 
 
 def main(args=None):
